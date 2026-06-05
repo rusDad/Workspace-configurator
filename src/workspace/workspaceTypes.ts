@@ -2,7 +2,7 @@ import type { CartShelf, ModuleSizeLabel, ShelfUnits, ToolCart, ToolItem } from 
 
 export type LaymentSupplyMode = 'empty' | 'with-tools';
 
-export type WizardStep = 'cart-selection' | 'shelf-filling' | 'summary';
+export type WizardStep = 'cart-selection' | 'shelf-filling' | 'loose-tools' | 'summary';
 
 export interface CatalogFoamSetPlacement {
   id: string;

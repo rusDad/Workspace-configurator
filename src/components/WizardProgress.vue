@@ -4,6 +4,7 @@ import type { WizardStep } from '../workspace/workspaceTypes';
 const steps: Array<{ id: WizardStep; label: string; description: string }> = [
   { id: 'cart-selection', label: 'Тележка', description: 'Выбор базы' },
   { id: 'shelf-filling', label: 'Наполнение', description: 'Полки и каталог' },
+  { id: 'loose-tools', label: 'Инструмент', description: 'Отдельные позиции' },
   { id: 'summary', label: 'Заявка', description: 'Итоговый состав' },
 ];
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import CatalogKitCard from './CatalogKitCard.vue';
+import CatalogKitDetails from './CatalogKitDetails.vue';
 import CurrentShelfPanel from './CurrentShelfPanel.vue';
 import type { CatalogFoamInsertKit, CartShelf, ModuleSizeLabel, ToolCart } from '../catalog/catalogTypes';
 import type { LaymentSupplyMode, ShelfPlacement, ShelfPlacements } from '../workspace/workspaceTypes';
@@ -32,6 +33,7 @@ function relayPlacementMode(placementId: string, mode: LaymentSupplyMode) {
 
 const searchQuery = ref('');
 const selectedSizeLabel = ref<ModuleSizeLabel | 'all'>('all');
+const selectedKit = ref<CatalogFoamInsertKit | null>(null);
 
 const sizeFilters: Array<{ label: string; value: ModuleSizeLabel | 'all' }> = [
   { label: 'Все', value: 'all' },
@@ -67,18 +69,23 @@ function fitShelfNames(kit: CatalogFoamInsertKit) {
     .filter((shelf) => shelf.id !== props.activeShelfId && canAddCatalogKit(kit, shelfPlacements(shelf.id), shelf.capacityUnits))
     .map((shelf) => shelf.name) ?? [];
 }
+
+function previewKit(kit: CatalogFoamInsertKit) {
+  selectedKit.value = kit;
+}
+
+function selectedKitDisabled() {
+  if (!selectedKit.value || !props.activeShelf) return true;
+  return !canAddCatalogKit(selectedKit.value, props.placements, props.activeShelf.capacityUnits);
+}
 </script>
 
 <template>
   <div v-if="cart && activeShelf" class="configurator-grid">
     <section class="configurator-left">
-      <div class="selected-cart-card card">
-        <div>
-          <p class="eyebrow">Выбранная тележка</p>
-          <h2>{{ cart.name }}</h2>
-          <p>Артикул {{ cart.article }} · {{ cart.shelves.length }} полок</p>
-        </div>
-        <button class="button" type="button" @click="$emit('summary')">Смотреть заявку</button>
+      <div class="configurator-context">
+        <span>Тележка: <strong>{{ cart.name }}</strong> · {{ cart.article }}</span>
+        <button class="button button--compact" type="button" @click="$emit('summary')">Далее</button>
       </div>
 
       <nav class="shelf-tabs" aria-label="Полки тележки">
@@ -103,6 +110,14 @@ function fitShelfNames(kit: CatalogFoamInsertKit) {
         @reset-active-shelf="$emit('resetActiveShelf')"
         @reset-all-shelves="$emit('resetAllShelves')"
       />
+
+      <CatalogKitDetails
+        :kit="selectedKit"
+        :default-new-placement-mode="defaultNewPlacementMode"
+        :disabled="selectedKitDisabled()"
+        @add="$emit('addCatalogKit', $event)"
+        @close="selectedKit = null"
+      />
     </section>
 
     <section class="catalog-section card">
@@ -112,7 +127,6 @@ function fitShelfNames(kit: CatalogFoamInsertKit) {
           <h2>Выберите наполнение</h2>
           <p>{{ activeShelf.name }}: {{ shelfRemainingUnits(activeShelf) }} / {{ activeShelf.capacityUnits }} свободно</p>
         </div>
-        <button class="button" type="button" disabled>Создать индивидуальный ложемент</button>
       </div>
 
       <div class="catalog-tools">
@@ -143,6 +157,7 @@ function fitShelfNames(kit: CatalogFoamInsertKit) {
           :disabled="!canAddCatalogKit(kit, placements, activeShelf.capacityUnits)"
           :fit-shelf-names="fitShelfNames(kit)"
           @add="$emit('addCatalogKit', $event)"
+          @preview="previewKit"
         />
       </div>
 

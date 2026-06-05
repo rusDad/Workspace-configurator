@@ -22,7 +22,7 @@ defineEmits<{
         <p>Индивидуальные ложементы будут подтверждены только после подтверждения общей заявки.</p>
       </div>
       <div class="summary-toolbar__actions">
-        <button class="button" type="button" @click="$emit('back')">Вернуться к наполнению</button>
+        <button class="button" type="button" @click="$emit('back')">Вернуться к инструменту</button>
         <button class="button button--primary" type="button" @click="$emit('createOrder')">Сформировать заявку</button>
       </div>
     </div>
