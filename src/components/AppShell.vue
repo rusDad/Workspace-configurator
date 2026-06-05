@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import WizardProgress from './WizardProgress.vue';
-import PriceSummary from './PriceSummary.vue';
 import type { WizardStep, WorkplaceOrderDraft } from '../workspace/workspaceTypes';
 
 defineProps<{
@@ -11,28 +10,37 @@ defineProps<{
 defineEmits<{
   goToStep: [step: WizardStep];
 }>();
+
+function formatPrice(value: number) {
+  return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 }).format(value);
+}
 </script>
 
 <template>
   <div class="app-shell">
-    <header class="hero">
+    <header class="app-header">
       <div>
-        <p class="eyebrow">Demo prototype</p>
-        <h1>Workplace Configurator Demo</h1>
-        <p class="hero__text">Подберите тележку, заполните полки ложементами и подготовьте коммерческую заявку.</p>
+        <p class="eyebrow">Комплектация рабочего места</p>
+        <h1>Конфигуратор рабочего места</h1>
+        <p class="app-header__text">Выберите тележку, наполните полки ложементами и подготовьте заявку для отдела продаж.</p>
       </div>
-      <div class="hero__badge">Vue 3 · Vite · TypeScript</div>
+      <div class="app-header__actions">
+        <strong class="total-pill">Итого: {{ formatPrice(orderDraft.totals.totalPrice) }}</strong>
+        <button
+          class="button button--primary"
+          type="button"
+          :disabled="!orderDraft.cart"
+          @click="$emit('goToStep', 'summary')"
+        >
+          К заявке
+        </button>
+      </div>
     </header>
 
     <WizardProgress :current-step="currentStep" @go-to-step="$emit('goToStep', $event)" />
 
     <main class="workspace-layout">
-      <section class="workspace-layout__content">
-        <slot />
-      </section>
-      <aside class="workspace-layout__summary">
-        <PriceSummary :totals="orderDraft.totals" />
-      </aside>
+      <slot />
     </main>
   </div>
 </template>

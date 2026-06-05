@@ -2,7 +2,6 @@
 import { computed } from 'vue';
 import AppShell from './components/AppShell.vue';
 import CartSelectionStep from './components/CartSelectionStep.vue';
-import ShelfSelectionStep from './components/ShelfSelectionStep.vue';
 import ShelfFillingStep from './components/ShelfFillingStep.vue';
 import SummaryStep from './components/SummaryStep.vue';
 import { demoCatalogKits, demoToolCarts } from './catalog/demoCatalog';
@@ -10,11 +9,13 @@ import type { CatalogFoamInsertKit } from './catalog/catalogTypes';
 import { createInitialWorkspaceState } from './workspace/workspaceState';
 import type { CatalogFoamSetPlacement, LaymentSupplyMode, ShelfPlacement, WizardStep } from './workspace/workspaceTypes';
 import { buildWorkplaceOrderDraft } from './workspace/orderBuilder';
+import { canAddCatalogKit } from './workspace/slotRules';
 
 const state = createInitialWorkspaceState();
 
 const selectedCart = computed(() => demoToolCarts.find((cart) => cart.article === state.selectedCartArticle) ?? null);
 const activeShelf = computed(() => selectedCart.value?.shelves.find((shelf) => shelf.id === state.activeShelfId) ?? null);
+const activePlacements = computed(() => (state.activeShelfId ? state.shelfPlacements[state.activeShelfId] ?? [] : []));
 const orderDraft = computed(() => buildWorkplaceOrderDraft(state, selectedCart.value));
 
 function selectCart(article: string) {
@@ -23,13 +24,12 @@ function selectCart(article: string) {
   state.activeShelfId = cart?.shelves[0]?.id ?? null;
   state.shelfPlacements = {};
   state.orderStatusMessage = null;
-  state.wizardStep = 'shelf-selection';
+  state.wizardStep = 'shelf-filling';
 }
 
 function selectShelf(shelfId: string) {
   state.activeShelfId = shelfId;
   state.orderStatusMessage = null;
-  state.wizardStep = 'shelf-filling';
 }
 
 function goToStep(step: WizardStep) {
@@ -43,20 +43,14 @@ function goToStep(step: WizardStep) {
     return;
   }
 
-  if ((step === 'shelf-filling' || step === 'summary') && !state.activeShelfId) {
-    state.wizardStep = 'shelf-selection';
-    return;
-  }
-
   state.wizardStep = step;
 }
 
-function setLaymentSupplyMode(mode: LaymentSupplyMode) {
-  state.laymentSupplyMode = mode;
-}
-
 function addCatalogKit(kit: CatalogFoamInsertKit) {
-  if (!state.activeShelfId) return;
+  if (!state.activeShelfId || !activeShelf.value) return;
+
+  const shelfPlacements = state.shelfPlacements[state.activeShelfId] ?? [];
+  if (!canAddCatalogKit(kit, shelfPlacements, activeShelf.value.capacityUnits)) return;
 
   const placement: CatalogFoamSetPlacement = {
     id: `${kit.article}-${crypto.randomUUID()}`,
@@ -65,6 +59,7 @@ function addCatalogKit(kit: CatalogFoamInsertKit) {
     name: kit.name,
     shelfUnits: kit.shelfUnits,
     sizeLabel: kit.sizeLabel,
+    laymentSupplyMode: state.defaultNewPlacementMode,
     priceEmpty: kit.priceEmpty,
     priceWithTools: kit.priceWithTools,
     previewUrl: kit.previewUrl,
@@ -72,7 +67,7 @@ function addCatalogKit(kit: CatalogFoamInsertKit) {
   };
 
   state.shelfPlacements[state.activeShelfId] = [
-    ...(state.shelfPlacements[state.activeShelfId] ?? []),
+    ...shelfPlacements,
     placement,
   ];
   state.orderStatusMessage = null;
@@ -86,22 +81,31 @@ function removePlacement(placementId: string) {
   state.orderStatusMessage = null;
 }
 
-function chooseNextShelf() {
-  if (!selectedCart.value || !state.activeShelfId) return;
+function updatePlacementMode(placementId: string, mode: LaymentSupplyMode) {
+  if (!state.activeShelfId) return;
 
-  const currentIndex = selectedCart.value.shelves.findIndex((shelf) => shelf.id === state.activeShelfId);
-  const nextShelf = selectedCart.value.shelves[currentIndex + 1];
+  state.shelfPlacements[state.activeShelfId] = (state.shelfPlacements[state.activeShelfId] ?? [])
+    .map((placement) => {
+      if (placement.id !== placementId || placement.kind !== 'catalog-foam-set') return placement;
+      return { ...placement, laymentSupplyMode: mode };
+    });
+  state.orderStatusMessage = null;
+}
 
-  if (nextShelf) {
-    state.activeShelfId = nextShelf.id;
-    state.wizardStep = 'shelf-filling';
-  } else {
-    state.wizardStep = 'summary';
-  }
+function resetActiveShelf() {
+  if (!state.activeShelfId) return;
+
+  state.shelfPlacements[state.activeShelfId] = [];
+  state.orderStatusMessage = null;
+}
+
+function resetAllShelves() {
+  state.shelfPlacements = {};
+  state.orderStatusMessage = null;
 }
 
 function createDemoOrder() {
-  state.orderStatusMessage = 'Демо-заявка сформирована. Реальная отправка на backend не выполняется.';
+  state.orderStatusMessage = 'Заявка сформирована для передачи в отдел продаж.';
 }
 </script>
 
@@ -118,27 +122,21 @@ function createDemoOrder() {
       @select-cart="selectCart"
     />
 
-    <ShelfSelectionStep
-      v-else-if="state.wizardStep === 'shelf-selection'"
-      :cart="selectedCart"
-      :active-shelf-id="state.activeShelfId"
-      :shelf-placements="state.shelfPlacements"
-      @select-shelf="selectShelf"
-      @back="goToStep('cart-selection')"
-    />
-
     <ShelfFillingStep
       v-else-if="state.wizardStep === 'shelf-filling'"
       :cart="selectedCart"
       :active-shelf="activeShelf"
+      :active-shelf-id="state.activeShelfId"
       :catalog-kits="demoCatalogKits"
-      :layment-supply-mode="state.laymentSupplyMode"
-      :placements="state.activeShelfId ? state.shelfPlacements[state.activeShelfId] ?? [] : []"
-      @set-layment-supply-mode="setLaymentSupplyMode"
+      :default-new-placement-mode="state.defaultNewPlacementMode"
+      :shelf-placements="state.shelfPlacements"
+      :placements="activePlacements"
+      @select-shelf="selectShelf"
       @add-catalog-kit="addCatalogKit"
       @remove-placement="removePlacement"
-      @back="goToStep('shelf-selection')"
-      @next-shelf="chooseNextShelf"
+      @update-placement-mode="updatePlacementMode"
+      @reset-active-shelf="resetActiveShelf"
+      @reset-all-shelves="resetAllShelves"
       @summary="goToStep('summary')"
     />
 
@@ -146,7 +144,6 @@ function createDemoOrder() {
       v-else
       :order-draft="orderDraft"
       :status-message="state.orderStatusMessage"
-      @set-layment-supply-mode="setLaymentSupplyMode"
       @back="goToStep('shelf-filling')"
       @create-order="createDemoOrder"
     />

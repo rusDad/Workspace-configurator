@@ -2,7 +2,7 @@ import type { CartShelf, ModuleSizeLabel, ShelfUnits, ToolCart, ToolItem } from 
 
 export type LaymentSupplyMode = 'empty' | 'with-tools';
 
-export type WizardStep = 'cart-selection' | 'shelf-selection' | 'shelf-filling' | 'summary';
+export type WizardStep = 'cart-selection' | 'shelf-filling' | 'summary';
 
 export interface CatalogFoamSetPlacement {
   id: string;
@@ -11,6 +11,7 @@ export interface CatalogFoamSetPlacement {
   name: string;
   shelfUnits: ShelfUnits;
   sizeLabel: ModuleSizeLabel;
+  laymentSupplyMode: LaymentSupplyMode;
   priceEmpty: number;
   priceWithTools: number;
   previewUrl: string | null;
@@ -38,7 +39,7 @@ export type ShelfPlacements = Record<string, ShelfPlacement[]>;
 export interface WorkplaceConfigState {
   selectedCartArticle: string | null;
   activeShelfId: string | null;
-  laymentSupplyMode: LaymentSupplyMode;
+  defaultNewPlacementMode: LaymentSupplyMode;
   shelfPlacements: ShelfPlacements;
   looseTools: ToolItem[];
   customLaymentResults: CustomLaymentPlacement[];
@@ -62,7 +63,6 @@ export interface WorkplaceOrderDraftShelf {
 export interface WorkplaceOrderDraft {
   schemaVersion: 1;
   cart: ToolCart | null;
-  laymentSupplyMode: LaymentSupplyMode;
   shelves: WorkplaceOrderDraftShelf[];
   looseTools: ToolItem[];
   totals: PriceSummaryTotals;
