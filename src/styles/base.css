@@ -202,33 +202,53 @@ p { color: var(--muted); line-height: 1.5; }
 .shelf-visual {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 8px;
+  gap: 0;
   align-items: stretch;
-  min-height: 260px;
+  aspect-ratio: 570 / 390;
+  min-height: 0;
   margin: 16px 0 12px;
-  padding: 18px;
+  padding: 10px;
   border: 8px solid #33424b;
   border-bottom-color: #19242a;
   border-radius: 18px 18px 24px 24px;
-  background:
-    linear-gradient(90deg, rgba(255,255,255,0.08), transparent),
-    linear-gradient(135deg, #c83b17, #e96420 45%, #b82b10);
+  background: #eef2f4;
 }
 .shelf-visual--empty { place-items: center; }
-.shelf-visual--empty p { grid-column: 1 / -1; margin: 0; color: rgba(255,255,255,0.92); text-align: center; font-weight: 750; }
+.shelf-visual--empty p { grid-column: 1 / -1; margin: 0; color: var(--muted); text-align: center; font-weight: 750; }
 .shelf-visual__placement {
   grid-column: span var(--placement-units);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 150px;
-  padding: 12px;
-  border: 1px solid rgba(255,255,255,0.36);
-  border-radius: 10px;
-  color: white;
-  background: linear-gradient(135deg, #25313a, #11181e);
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid #cfd9df;
+  color: #26323c;
+  background: #f3f6f8;
 }
-.shelf-visual__placement span { color: rgba(255,255,255,0.76); font-size: 0.82rem; }
+.shelf-visual__placement img { display: block; width: 100%; height: 100%; object-fit: fill; }
+.shelf-visual__fallback {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  padding: 10px;
+  text-align: center;
+}
+.shelf-visual__fallback span { color: var(--muted); font-size: 0.82rem; }
+.shelf-visual__remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid rgba(24, 36, 45, 0.18);
+  border-radius: 50%;
+  color: #1e2a33;
+  background: rgba(255, 255, 255, 0.86);
+  font-size: 1.25rem;
+  font-weight: 850;
+  line-height: 1;
+}
 .shelf-actions-inline { display: flex; justify-content: center; gap: 22px; margin-bottom: 14px; }
 
 .catalog-section__header { align-items: center; margin-bottom: 14px; }

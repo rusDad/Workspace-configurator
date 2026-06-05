@@ -25,6 +25,12 @@ function placementModeLabel(placement: ShelfPlacement) {
   if (placement.kind !== 'catalog-foam-set') return 'индивидуальный ложемент';
   return placement.laymentSupplyMode === 'empty' ? 'пустое ложемент' : 'с инструментом';
 }
+
+function placementShelfImageUrl(placement: ShelfPlacement) {
+  if (placement.kind === 'custom-layment') return placement.previewPngUrl;
+  if (!placement.previewUrl?.startsWith('/catalog-assets/kits/')) return null;
+  return placement.previewUrl.replace('/catalog-assets/kits/', '/catalog-assets/shelf-kits/');
+}
 </script>
 
 <template>
@@ -47,8 +53,23 @@ function placementModeLabel(placement: ShelfPlacement) {
         class="shelf-visual__placement"
         :style="{ '--placement-units': placement.shelfUnits }"
       >
-        <span>{{ placement.sizeLabel }}</span>
-        <strong>{{ placement.article }}</strong>
+        <img
+          v-if="placementShelfImageUrl(placement)"
+          :src="placementShelfImageUrl(placement) ?? undefined"
+          :alt="`Изображение ложемента ${placement.article}`"
+        />
+        <div v-else class="shelf-visual__fallback">
+          <span>{{ placement.sizeLabel }}</span>
+          <strong>{{ placement.article }}</strong>
+        </div>
+        <button
+          class="shelf-visual__remove"
+          type="button"
+          :aria-label="`Удалить ложемент ${placement.article}`"
+          @click="$emit('remove', placement.id)"
+        >
+          −
+        </button>
       </article>
       <p v-if="!placements.length">Полка свободна. Добавьте ложемент из каталога справа.</p>
     </div>
