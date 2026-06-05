@@ -15,7 +15,7 @@ defineEmits<{ selectCart: [article: string] }>();
     <div class="step-heading">
       <p class="eyebrow">Шаг 1</p>
       <h2>Выберите инструментальную тележку</h2>
-      <p>Выберите базовую тележку. Реальные изображения будут подключены отдельным этапом.</p>
+      <p>Выберите базовую тележку для комплектации рабочего места.</p>
     </div>
     <div class="cart-grid">
       <CartCard

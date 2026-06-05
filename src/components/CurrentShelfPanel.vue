@@ -3,7 +3,7 @@ import ShelfUnitBar from './ShelfUnitBar.vue';
 import type { CartShelf } from '../catalog/catalogTypes';
 import type { LaymentSupplyMode, ShelfPlacement } from '../workspace/workspaceTypes';
 import { getPlacementPrice } from '../workspace/priceCalculator';
-import { getRemainingShelfUnits, getUsedShelfUnits } from '../workspace/slotRules';
+import { getUsedShelfUnits } from '../workspace/slotRules';
 
 defineProps<{
   shelf: CartShelf;
@@ -23,7 +23,7 @@ function formatPrice(value: number) {
 
 function placementModeLabel(placement: ShelfPlacement) {
   if (placement.kind !== 'catalog-foam-set') return 'индивидуальный ложемент';
-  return placement.laymentSupplyMode === 'empty' ? 'пустое ложемент' : 'с инструментом';
+  return placement.laymentSupplyMode === 'empty' ? 'пустой ложемент' : 'ложемент с инструментом';
 }
 
 function placementShelfImageUrl(placement: ShelfPlacement) {
@@ -31,17 +31,21 @@ function placementShelfImageUrl(placement: ShelfPlacement) {
   if (!placement.previewUrl?.startsWith('/catalog-assets/kits/')) return null;
   return placement.previewUrl.replace('/catalog-assets/kits/', '/catalog-assets/shelf-kits/');
 }
+
+function fillPercent(placements: ShelfPlacement[], capacityUnits: number) {
+  return Math.round((getUsedShelfUnits(placements) / capacityUnits) * 100);
+}
 </script>
 
 <template>
   <section class="current-shelf card">
     <div class="current-shelf__header">
       <div>
-        <p class="eyebrow">Активная полка</p>
+        <p class="eyebrow">Выбранная полка</p>
         <h3>{{ shelf.name }}</h3>
         <p>{{ shelf.widthMm }}×{{ shelf.heightMm }} мм</p>
       </div>
-      <strong class="capacity-pill">{{ getRemainingShelfUnits(placements, shelf.capacityUnits) }} / {{ shelf.capacityUnits }} свободно</strong>
+      <strong class="capacity-pill">Заполнено {{ fillPercent(placements, shelf.capacityUnits) }}%</strong>
     </div>
 
     <ShelfUnitBar :used-units="getUsedShelfUnits(placements)" :capacity-units="shelf.capacityUnits" />
@@ -92,7 +96,7 @@ function placementShelfImageUrl(placement: ShelfPlacement) {
               type="button"
               @click="$emit('updateMode', placement.id, 'empty')"
             >
-              Пустое
+              Пустой ложемент
             </button>
             <button
               class="segmented-button"

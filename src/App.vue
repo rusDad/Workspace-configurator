@@ -2,10 +2,11 @@
 import { computed } from 'vue';
 import AppShell from './components/AppShell.vue';
 import CartSelectionStep from './components/CartSelectionStep.vue';
+import LooseToolsStep from './components/LooseToolsStep.vue';
 import ShelfFillingStep from './components/ShelfFillingStep.vue';
 import SummaryStep from './components/SummaryStep.vue';
 import { demoCatalogKits, demoToolCarts } from './catalog/demoCatalog';
-import type { CatalogFoamInsertKit } from './catalog/catalogTypes';
+import type { CatalogFoamInsertKit, ToolItem } from './catalog/catalogTypes';
 import { createInitialWorkspaceState } from './workspace/workspaceState';
 import type { CatalogFoamSetPlacement, LaymentSupplyMode, ShelfPlacement, WizardStep } from './workspace/workspaceTypes';
 import { buildWorkplaceOrderDraft } from './workspace/orderBuilder';
@@ -17,12 +18,26 @@ const selectedCart = computed(() => demoToolCarts.find((cart) => cart.article ==
 const activeShelf = computed(() => selectedCart.value?.shelves.find((shelf) => shelf.id === state.activeShelfId) ?? null);
 const activePlacements = computed(() => (state.activeShelfId ? state.shelfPlacements[state.activeShelfId] ?? [] : []));
 const orderDraft = computed(() => buildWorkplaceOrderDraft(state, selectedCart.value));
+const looseToolCatalog = computed(() => {
+  const tools = new Map<string, ToolItem>();
+
+  for (const kit of demoCatalogKits) {
+    for (const tool of kit.includedTools) {
+      if (!tools.has(tool.article)) {
+        tools.set(tool.article, tool);
+      }
+    }
+  }
+
+  return Array.from(tools.values()).sort((left, right) => left.article.localeCompare(right.article));
+});
 
 function selectCart(article: string) {
   state.selectedCartArticle = article;
   const cart = demoToolCarts.find((item) => item.article === article);
   state.activeShelfId = cart?.shelves[0]?.id ?? null;
   state.shelfPlacements = {};
+  state.looseTools = [];
   state.orderStatusMessage = null;
   state.wizardStep = 'shelf-filling';
 }
@@ -104,6 +119,19 @@ function resetAllShelves() {
   state.orderStatusMessage = null;
 }
 
+function addLooseTool(tool: ToolItem) {
+  state.looseTools = [...state.looseTools, tool];
+  state.orderStatusMessage = null;
+}
+
+function removeLooseTool(article: string) {
+  const toolIndex = state.looseTools.findIndex((tool) => tool.article === article);
+  if (toolIndex === -1) return;
+
+  state.looseTools = state.looseTools.filter((_, index) => index !== toolIndex);
+  state.orderStatusMessage = null;
+}
+
 function createDemoOrder() {
   state.orderStatusMessage = 'Заявка сформирована для передачи в отдел продаж.';
 }
@@ -137,6 +165,16 @@ function createDemoOrder() {
       @update-placement-mode="updatePlacementMode"
       @reset-active-shelf="resetActiveShelf"
       @reset-all-shelves="resetAllShelves"
+      @summary="goToStep('loose-tools')"
+    />
+
+    <LooseToolsStep
+      v-else-if="state.wizardStep === 'loose-tools'"
+      :tools="looseToolCatalog"
+      :selected-tools="state.looseTools"
+      @add-tool="addLooseTool"
+      @remove-tool="removeLooseTool"
+      @back="goToStep('shelf-filling')"
       @summary="goToStep('summary')"
     />
 
@@ -144,7 +182,7 @@ function createDemoOrder() {
       v-else
       :order-draft="orderDraft"
       :status-message="state.orderStatusMessage"
-      @back="goToStep('shelf-filling')"
+      @back="goToStep('loose-tools')"
       @create-order="createDemoOrder"
     />
   </AppShell>

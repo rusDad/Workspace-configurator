@@ -14,7 +14,7 @@ function placementKindLabel(placement: ShelfPlacement) {
 
 function placementModeLabel(placement: ShelfPlacement) {
   if (placement.kind !== 'catalog-foam-set') return 'по индивидуальной заявке';
-  return placement.laymentSupplyMode === 'empty' ? 'пустое ложемент' : 'с инструментом';
+  return placement.laymentSupplyMode === 'empty' ? 'пустой ложемент' : 'ложемент с инструментом';
 }
 </script>
 
@@ -78,8 +78,27 @@ function placementModeLabel(placement: ShelfPlacement) {
             </tr>
           </tbody>
         </table>
-        <p v-else class="empty-note">Полка не заполнена.</p>
       </article>
+    </section>
+
+    <section v-if="orderDraft.looseTools.length" class="order-document__section">
+      <h3>Отдельный инструмент</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Артикул</th>
+            <th>Наименование</th>
+            <th>Цена</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(tool, index) in orderDraft.looseTools" :key="`${tool.article}-${index}`">
+            <td>{{ tool.article }}</td>
+            <td>{{ tool.name }}</td>
+            <td>{{ formatPrice(tool.price) }}</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
     <section class="order-document__section order-totals">

@@ -12,10 +12,12 @@ export function buildWorkplaceOrderDraft(state: WorkplaceConfigState, cart: Tool
   return {
     schemaVersion: 1,
     cart,
-    shelves: cart?.shelves.map((shelf) => ({
-      shelf,
-      placements: state.shelfPlacements[shelf.id] ?? [],
-    })) ?? [],
+    shelves: cart?.shelves
+      .map((shelf) => ({
+        shelf,
+        placements: state.shelfPlacements[shelf.id] ?? [],
+      }))
+      .filter((item) => item.placements.length > 0) ?? [],
     looseTools: state.looseTools,
     totals,
   };

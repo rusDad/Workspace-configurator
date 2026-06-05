@@ -10,10 +10,6 @@ defineProps<{
 defineEmits<{
   goToStep: [step: WizardStep];
 }>();
-
-function formatPrice(value: number) {
-  return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 }).format(value);
-}
 </script>
 
 <template>
@@ -25,9 +21,8 @@ function formatPrice(value: number) {
         <p class="app-header__text">Выберите тележку, наполните полки ложементами и подготовьте заявку для отдела продаж.</p>
       </div>
       <div class="app-header__actions">
-        <strong class="total-pill">Итого: {{ formatPrice(orderDraft.totals.totalPrice) }}</strong>
         <button
-          class="button button--primary"
+          class="button button--header"
           type="button"
           :disabled="!orderDraft.cart"
           @click="$emit('goToStep', 'summary')"
