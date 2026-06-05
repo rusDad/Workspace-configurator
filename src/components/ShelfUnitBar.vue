@@ -10,7 +10,7 @@ const units = computed(() => Array.from({ length: props.capacityUnits }, (_, ind
 </script>
 
 <template>
-  <div class="shelf-unit-bar" :aria-label="`Занято ${usedUnits} из ${capacityUnits} shelf units`">
+  <div class="shelf-unit-bar" :aria-label="`Занято ${usedUnits} из ${capacityUnits} единиц полки`">
     <span v-for="(filled, index) in units" :key="index" :class="{ 'is-filled': filled }" />
   </div>
 </template>

@@ -8,13 +8,22 @@ import { getRemainingShelfUnits, getUsedShelfUnits } from '../workspace/slotRule
 defineProps<{
   shelf: CartShelf;
   placements: ShelfPlacement[];
-  laymentSupplyMode: LaymentSupplyMode;
 }>();
 
-defineEmits<{ remove: [placementId: string] }>();
+defineEmits<{
+  remove: [placementId: string];
+  updateMode: [placementId: string, mode: LaymentSupplyMode];
+  resetActiveShelf: [];
+  resetAllShelves: [];
+}>();
 
 function formatPrice(value: number) {
   return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 }).format(value);
+}
+
+function placementModeLabel(placement: ShelfPlacement) {
+  if (placement.kind !== 'catalog-foam-set') return 'индивидуальный ложемент';
+  return placement.laymentSupplyMode === 'empty' ? 'пустое ложемент' : 'с инструментом';
 }
 </script>
 
@@ -26,25 +35,60 @@ function formatPrice(value: number) {
         <h3>{{ shelf.name }}</h3>
         <p>{{ shelf.widthMm }}×{{ shelf.heightMm }} мм</p>
       </div>
-      <strong>{{ getUsedShelfUnits(placements) }} / {{ shelf.capacityUnits }}</strong>
+      <strong class="capacity-pill">{{ getRemainingShelfUnits(placements, shelf.capacityUnits) }} / {{ shelf.capacityUnits }} свободно</strong>
     </div>
 
     <ShelfUnitBar :used-units="getUsedShelfUnits(placements)" :capacity-units="shelf.capacityUnits" />
-    <p class="muted">Осталось {{ getRemainingShelfUnits(placements, shelf.capacityUnits) }} shelf units</p>
+
+    <div class="shelf-visual" :class="{ 'shelf-visual--empty': !placements.length }">
+      <article
+        v-for="placement in placements"
+        :key="placement.id"
+        class="shelf-visual__placement"
+        :style="{ '--placement-units': placement.shelfUnits }"
+      >
+        <span>{{ placement.sizeLabel }}</span>
+        <strong>{{ placement.article }}</strong>
+      </article>
+      <p v-if="!placements.length">Полка свободна. Добавьте ложемент из каталога справа.</p>
+    </div>
+
+    <div class="shelf-actions-inline">
+      <button class="link-button" type="button" @click="$emit('resetActiveShelf')">Очистить полку</button>
+      <button class="link-button" type="button" @click="$emit('resetAllShelves')">Очистить все полки</button>
+    </div>
 
     <div v-if="placements.length" class="placement-list">
       <article v-for="placement in placements" :key="placement.id" class="placement-row">
-        <div>
-          <p class="eyebrow">{{ placement.kind === 'catalog-foam-set' ? 'Каталог kit' : 'Custom layment' }}</p>
+        <div class="placement-row__main">
+          <p class="eyebrow">{{ placement.kind === 'catalog-foam-set' ? 'Каталог' : 'Индивидуально' }}</p>
           <strong>{{ placement.name }}</strong>
-          <span>{{ placement.article }} · {{ placement.sizeLabel }}</span>
+          <span>{{ placement.article }} · {{ placement.sizeLabel }} · {{ placementModeLabel(placement) }}</span>
+          <div v-if="placement.kind === 'catalog-foam-set'" class="placement-mode" role="group" aria-label="Режим поставки ложемента">
+            <button
+              class="segmented-button"
+              :class="{ 'segmented-button--active': placement.laymentSupplyMode === 'empty' }"
+              type="button"
+              @click="$emit('updateMode', placement.id, 'empty')"
+            >
+              Пустое
+            </button>
+            <button
+              class="segmented-button"
+              :class="{ 'segmented-button--active': placement.laymentSupplyMode === 'with-tools' }"
+              type="button"
+              @click="$emit('updateMode', placement.id, 'with-tools')"
+            >
+              С инструментом
+            </button>
+          </div>
         </div>
         <div class="placement-row__side">
-          <strong>{{ formatPrice(getPlacementPrice(placement, laymentSupplyMode)) }}</strong>
-          <button class="button button--ghost" type="button" @click="$emit('remove', placement.id)">Remove</button>
+          <strong>{{ formatPrice(getPlacementPrice(placement)) }}</strong>
+          <button class="button button--ghost" type="button" @click="$emit('remove', placement.id)">Удалить</button>
         </div>
       </article>
     </div>
-    <p v-else class="empty-note">Пока нет добавленных foam insert kits.</p>
+    <p v-else class="empty-note">На полке пока нет ложементов.</p>
   </section>
 </template>

@@ -3,9 +3,8 @@ import type { WizardStep } from '../workspace/workspaceTypes';
 
 const steps: Array<{ id: WizardStep; label: string; description: string }> = [
   { id: 'cart-selection', label: 'Тележка', description: 'Выбор базы' },
-  { id: 'shelf-selection', label: 'Полка', description: 'Рабочая зона' },
-  { id: 'shelf-filling', label: 'Наполнение', description: 'Каталог китов' },
-  { id: 'summary', label: 'Заявка', description: 'Итог заказа' },
+  { id: 'shelf-filling', label: 'Наполнение', description: 'Полки и каталог' },
+  { id: 'summary', label: 'Заявка', description: 'Итоговый состав' },
 ];
 
 const props = defineProps<{ currentStep: WizardStep }>();
@@ -22,7 +21,7 @@ function stepState(step: WizardStep) {
 </script>
 
 <template>
-  <nav class="wizard-progress" aria-label="Configurator steps">
+  <nav class="wizard-progress" aria-label="Этапы конфигуратора">
     <button
       v-for="(step, index) in steps"
       :key="step.id"

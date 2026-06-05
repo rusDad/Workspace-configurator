@@ -18,7 +18,7 @@ defineEmits<{ select: [shelfId: string] }>();
     <div>
       <p class="eyebrow">{{ shelf.widthMm }}×{{ shelf.heightMm }} мм</p>
       <h3>{{ shelf.name }}</h3>
-      <p>{{ getUsedShelfUnits(placements) }} / {{ shelf.capacityUnits }} shelf units занято</p>
+      <p>{{ getUsedShelfUnits(placements) }} / {{ shelf.capacityUnits }} единиц полки занято</p>
       <ShelfUnitBar :used-units="getUsedShelfUnits(placements)" :capacity-units="shelf.capacityUnits" />
     </div>
     <button class="button button--primary" type="button" @click="$emit('select', shelf.id)">

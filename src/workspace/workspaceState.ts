@@ -5,7 +5,7 @@ export function createInitialWorkspaceState(): WorkplaceConfigState {
   return reactive({
     selectedCartArticle: null,
     activeShelfId: null,
-    laymentSupplyMode: 'empty',
+    defaultNewPlacementMode: 'with-tools',
     shelfPlacements: {},
     looseTools: [],
     customLaymentResults: [],

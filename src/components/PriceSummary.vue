@@ -18,11 +18,11 @@ function formatPrice(value: number) {
         <dd>{{ formatPrice(totals.cartPrice) }}</dd>
       </div>
       <div>
-        <dt>Каталог китов</dt>
+        <dt>Каталожные ложементы</dt>
         <dd>{{ formatPrice(totals.catalogKitsPrice) }}</dd>
       </div>
       <div>
-        <dt>Кастомные ложементы</dt>
+        <dt>Индивидуальные ложементы</dt>
         <dd>{{ formatPrice(totals.customLaymentsPrice) }}</dd>
       </div>
       <div>
