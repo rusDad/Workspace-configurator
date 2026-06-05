@@ -14,6 +14,7 @@ const SOURCE_DIRS = {
 const OUTPUT_DIRS = {
   carts: path.join(ROOT_DIR, 'public', 'catalog-assets', 'carts'),
   kits: path.join(ROOT_DIR, 'public', 'catalog-assets', 'kits'),
+  shelfKits: path.join(ROOT_DIR, 'public', 'catalog-assets', 'shelf-kits'),
   placeholders: path.join(ROOT_DIR, 'public', 'catalog-assets', 'placeholders'),
 };
 
@@ -48,6 +49,7 @@ async function ensureDirectories() {
     fs.mkdir(SOURCE_DIRS.kits, { recursive: true }),
     fs.mkdir(OUTPUT_DIRS.carts, { recursive: true }),
     fs.mkdir(OUTPUT_DIRS.kits, { recursive: true }),
+    fs.mkdir(OUTPUT_DIRS.shelfKits, { recursive: true }),
     fs.mkdir(OUTPUT_DIRS.placeholders, { recursive: true }),
   ]);
 }
@@ -158,15 +160,51 @@ function getArrayBody(source, exportName) {
 }
 
 function parseTopLevelItems(arrayBody) {
-  const itemRegex = /^  \{\r?\n    article: '([^']+)',([\s\S]*?)(?=^  \{\r?\n    article: |\s*$)/gm;
+  const itemSources = [];
   const items = [];
-  let match;
+  let depth = 0;
+  let startIndex = null;
+  let quote = null;
+  let isEscaped = false;
 
-  while ((match = itemRegex.exec(arrayBody))) {
-    const [, article, body] = match;
-    const shelfUnitsMatch = body.match(/^\s+shelfUnits: (\d+),/m);
+  for (let index = 0; index < arrayBody.length; index += 1) {
+    const char = arrayBody[index];
+
+    if (quote) {
+      if (isEscaped) {
+        isEscaped = false;
+      } else if (char === '\\') {
+        isEscaped = true;
+      } else if (char === quote) {
+        quote = null;
+      }
+      continue;
+    }
+
+    if (char === '\'' || char === '"' || char === '`') {
+      quote = char;
+      continue;
+    }
+
+    if (char === '{') {
+      if (depth === 0) startIndex = index;
+      depth += 1;
+    } else if (char === '}') {
+      depth -= 1;
+      if (depth === 0 && startIndex !== null) {
+        itemSources.push(arrayBody.slice(startIndex, index + 1));
+        startIndex = null;
+      }
+    }
+  }
+
+  for (const itemSource of itemSources) {
+    const articleMatch = itemSource.match(/^\s*article: '([^']+)',/m);
+    if (!articleMatch) continue;
+
+    const shelfUnitsMatch = itemSource.match(/^\s*shelfUnits: (\d+),/m);
     items.push({
-      article,
+      article: articleMatch[1],
       shelfUnits: shelfUnitsMatch ? Number(shelfUnitsMatch[1]) : null,
     });
   }
@@ -204,18 +242,23 @@ async function processCartImage(inputPath, outputPath) {
     .toFile(outputPath);
 }
 
-async function processKitImage(inputPath, outputPath, shelfUnits) {
+async function createNormalizedKitBuffer(inputPath, shelfUnits) {
   const visibleWidth = Math.round((KIT_CANVAS.width * (shelfUnits || 6)) / 6);
-  const normalized = await sharp(inputPath)
+
+  return sharp(inputPath)
     .rotate()
     .resize({
       width: visibleWidth,
       height: KIT_CANVAS.height,
-      fit: 'contain',
-      background: { ...LIGHT_GRAY, alpha: 0 },
+      fit: 'fill',
     })
     .webp({ quality: 86 })
     .toBuffer();
+}
+
+async function processKitCardImage(inputPath, outputPath, shelfUnits) {
+  const visibleWidth = Math.round((KIT_CANVAS.width * (shelfUnits || 6)) / 6);
+  const normalized = await createNormalizedKitBuffer(inputPath, shelfUnits);
 
   await sharp({
     create: {
@@ -228,12 +271,17 @@ async function processKitImage(inputPath, outputPath, shelfUnits) {
     .composite([
       {
         input: normalized,
-        left: Math.round((KIT_CANVAS.width - visibleWidth) / 2),
+        left: 0,
         top: 0,
       },
     ])
     .webp({ quality: 86 })
     .toFile(outputPath);
+}
+
+async function processKitShelfImage(inputPath, outputPath, shelfUnits) {
+  const normalized = await createNormalizedKitBuffer(inputPath, shelfUnits);
+  await fs.writeFile(outputPath, normalized);
 }
 
 async function prepareAssets() {
@@ -281,9 +329,11 @@ async function prepareAssets() {
 
     const fileName = `${normalizeArticleToAssetName(kit.article, index)}.webp`;
     const outputPath = path.join(OUTPUT_DIRS.kits, fileName);
-    await processKitImage(sourcePath, outputPath, kit.shelfUnits);
+    const shelfOutputPath = path.join(OUTPUT_DIRS.shelfKits, fileName);
+    await processKitCardImage(sourcePath, outputPath, kit.shelfUnits);
+    await processKitShelfImage(sourcePath, shelfOutputPath, kit.shelfUnits);
     kitUrls.set(kit.article, `/catalog-assets/kits/${fileName}`);
-    generatedFiles += 1;
+    generatedFiles += 2;
   }
 
   const updatedCartsBody = updateTopLevelPreviewUrls(cartsArray.body, cartUrls);
