@@ -16,7 +16,8 @@ function formatPrice(value: number) {
 <template>
   <article class="cart-card card" :class="{ 'card--selected': selected }">
     <div class="visual-placeholder visual-placeholder--cart">
-      <span>{{ cart.article }}</span>
+      <img v-if="cart.previewUrl" :src="cart.previewUrl" :alt="`Изображение тележки ${cart.article}`" />
+      <span v-else>{{ cart.article }}</span>
     </div>
     <div class="cart-card__body">
       <p class="eyebrow">{{ cart.article }}</p>

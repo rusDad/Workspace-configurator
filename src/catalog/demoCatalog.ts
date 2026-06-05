@@ -22,7 +22,7 @@ export const demoToolCarts: ToolCart[] = [
   {
     article: 's01006',
     name: 'Тележка инструментальная 6 полочная серая',
-    previewUrl: '/placeholder-cart-s01006.svg',
+    previewUrl: '/catalog-assets/carts/s01006.webp',
     price: 37990,
     shelves: [
       { id: 'shelf-1', name: 'Полка 1', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
@@ -36,7 +36,7 @@ export const demoToolCarts: ToolCart[] = [
   {
     article: 's01007',
     name: 'Тележка инструментальная 7 полочная серая',
-    previewUrl: '/placeholder-cart-s01007.svg',
+    previewUrl: '/catalog-assets/carts/s01007.webp',
     price: 39990,
     shelves: [
       { id: 'shelf-1', name: 'Полка 1', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
@@ -54,7 +54,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646073',
     name: 'Набор ключей комбинированных 18 пр. 6-24 мм в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646073.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -83,7 +83,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646077',
     name: 'Набор ключей комбинированных 27 пр. 6-36 мм в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646077.webp',
     shelfUnits: 6,
     sizeLabel: 'полка целиком',
     priceEmpty: demoEmptyLaymentPrice(6),
@@ -121,7 +121,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646075',
     name: 'Набор ключей комбинированных 27, 30, 32 мм, 3 пр., в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646075.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -135,7 +135,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646080',
     name: 'Набор ключей комбинированных 6-32 мм, трещоточных 8-24 мм и разрезных 8-22 мм, 37 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646080.webp',
     shelfUnits: 6,
     sizeLabel: 'полка целиком',
     priceEmpty: demoEmptyLaymentPrice(6),
@@ -183,7 +183,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646160',
     name: 'Набор ключей комбинированных трещоточных 7 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646160.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -201,7 +201,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646170',
     name: 'Набор ключей комбинированных трещоточных 8-24 мм, 11 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646170.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -223,7 +223,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646165',
     name: 'Набор ключей комбинированных трещоточных с шарниром 7 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646165.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -241,7 +241,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646175',
     name: 'Набор ключей комбинированных трещоточных с шарниром 8-24 мм, 11 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646175.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -263,7 +263,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646140',
     name: 'Набор ключей накидных 10 пр. 6-32 мм в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646140.webp',
     shelfUnits: 4,
     sizeLabel: '2/3 полки',
     priceEmpty: demoEmptyLaymentPrice(4),
@@ -275,7 +275,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646258',
     name: 'Набор отверток стандартных 8 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646258.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -294,7 +294,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646265',
     name: 'Набор отверток цельнометаллических 6 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646265.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -311,7 +311,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646280',
     name: 'Набор отверток цельнометаллических и стандартных 8 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646280.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -330,7 +330,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646382',
     name: 'Набор слесарного инструмента: ручные тиски, переставные клещи, молоток 500 г, 3 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646382.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -344,7 +344,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646048',
     name: 'Набор съемников стопорных колец усиленных 180 и 230 мм, 6 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646048.webp',
     shelfUnits: 4,
     sizeLabel: '2/3 полки',
     priceEmpty: demoEmptyLaymentPrice(4),
@@ -361,7 +361,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646340',
     name: 'Набор съемников стопорных колец усиленных 180 мм, 4 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646340.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -376,7 +376,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646045',
     name: 'Набор съемников стопорных колец усиленных 230 мм, 4 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646045.webp',
     shelfUnits: 4,
     sizeLabel: '2/3 полки',
     priceEmpty: demoEmptyLaymentPrice(4),
@@ -391,7 +391,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646062',
     name: 'Набор торцевых головок 1/2" 41 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646062.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -443,7 +443,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '645015',
     name: 'Набор торцевых головок 1/4" 43 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/645015.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -497,7 +497,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646310',
     name: 'Набор шарнирно-губцевого инструмента 4 пр., 180 и 200 мм в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646310.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -512,7 +512,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646305',
     name: 'Набор шарнирно-губцевого инструмента 4 пр., 160 и 180 мм в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646305.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -527,7 +527,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646320',
     name: 'Набор шарнирно-губцевого инструмента 6 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646320.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -544,7 +544,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646100',
     name: 'Набор ключей комбинированных удлиненных 13 пр. 10-24 мм в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646100.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -568,7 +568,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646110',
     name: 'Набор ключей комбинированных удлиненных 16 пр. 10-32 мм в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646110.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -595,7 +595,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646010',
     name: 'Набор бит 10 мм, Torx, Spline, Hex, 48 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/placeholders/kit-placeholder.svg',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -654,7 +654,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646058',
     name: 'Набор торцевых головок 3/8" 36 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646058.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -701,7 +701,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646560',
     name: 'Набор пневмоинструмента с усиленным гайковертом 32 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646560.webp',
     shelfUnits: 6,
     sizeLabel: 'полка целиком',
     priceEmpty: demoEmptyLaymentPrice(6),
@@ -742,7 +742,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646155',
     name: 'Набор инструментов 1/2" и 1/4" 155 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646155.webp',
     shelfUnits: 6,
     sizeLabel: 'полка целиком',
     priceEmpty: demoEmptyLaymentPrice(6),
@@ -884,7 +884,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '645695',
     name: 'Набор отверток Torx, 8 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/645695.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -903,7 +903,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '645535',
     name: 'Набор торцевых головок глубоких 1/2" 10-32 мм, 13 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/645535.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -927,7 +927,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '645595',
     name: 'Набор ключей разрезных 6-24 мм, 6 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/645595.webp',
     shelfUnits: 1,
     sizeLabel: '1/6 полки',
     priceEmpty: demoEmptyLaymentPrice(1),
@@ -944,7 +944,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '645545',
     name: 'Набор бит и головок Е-профиль 89 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/645545.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -1020,7 +1020,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '645635',
     name: 'Набор ключей торцевых шарнирных 6-19 мм, 6 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/645635.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -1037,7 +1037,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646570',
     name: 'Набор пневмоинструмента с усиленным гайковертом 34 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646570.webp',
     shelfUnits: 6,
     sizeLabel: 'полка целиком',
     priceEmpty: demoEmptyLaymentPrice(6),
@@ -1079,7 +1079,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '620015',
     name: 'Набор ударных головок 1/2" 10 - 32 мм 15 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/620015.webp',
     shelfUnits: 1,
     sizeLabel: '1/6 полки',
     priceEmpty: demoEmptyLaymentPrice(1),
@@ -1105,7 +1105,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '620012',
     name: 'Набор ударных головок глубоких 1/2" 10 - 32 мм 12 пр в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/620012.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
     priceEmpty: demoEmptyLaymentPrice(2),
@@ -1128,7 +1128,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
   {
     article: '646580',
     name: 'Набор пневмоинструмента с гайковертом 32 пр. в ложементе EVA',
-    previewUrl: null,
+    previewUrl: '/catalog-assets/kits/646580.webp',
     shelfUnits: 6,
     sizeLabel: 'полка целиком',
     priceEmpty: demoEmptyLaymentPrice(6),

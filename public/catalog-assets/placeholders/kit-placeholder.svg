@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="570" height="390" viewBox="0 0 570 390" role="img" aria-labelledby="title desc">
+  <title id="title">Kit image placeholder</title>
+  <desc id="desc">Neutral placeholder for a foam insert kit image.</desc>
+  <rect width="570" height="390" rx="18" fill="#f3f6f8"/>
+  <rect x="64" y="78" width="442" height="234" rx="18" fill="#e1e8ec" stroke="#b9c8d0" stroke-width="4"/>
+  <path d="M124 142h116v42H124zM270 142h176v42H270zM124 214h92v42h-92zM248 214h198v42H248z" fill="#c7d3da"/>
+  <text x="285" y="346" text-anchor="middle" fill="#66737d" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Foam kit image</text>
+</svg>

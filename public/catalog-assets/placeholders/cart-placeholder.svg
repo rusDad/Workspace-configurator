@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="570" viewBox="0 0 720 570" role="img" aria-labelledby="title desc">
+  <title id="title">Cart image placeholder</title>
+  <desc id="desc">Neutral placeholder for a tool cart image.</desc>
+  <rect width="720" height="570" rx="18" fill="#f3f6f8"/>
+  <rect x="190" y="120" width="340" height="292" rx="22" fill="#e1e8ec" stroke="#b9c8d0" stroke-width="5"/>
+  <path d="M226 178h268M226 236h268M226 294h268M226 352h268" stroke="#c0ccd3" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="252" cy="448" r="28" fill="#66737d"/>
+  <circle cx="468" cy="448" r="28" fill="#66737d"/>
+  <text x="360" y="516" text-anchor="middle" fill="#66737d" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">Tool cart image</text>
+</svg>
