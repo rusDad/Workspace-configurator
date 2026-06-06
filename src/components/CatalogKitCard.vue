@@ -43,12 +43,12 @@ function sizeBadgeLabel(sizeLabel: string) {
     </div>
     <div class="catalog-kit-card__footer">
       <span class="size-badge">{{ sizeBadgeLabel(kit.sizeLabel) }}</span>
-      <button class="add-circle" type="button" :disabled="disabled" @click="$emit('add', kit)" aria-label="Добавить ложемент">
-        +
+      <button class="link-button catalog-kit-card__add" type="button" :disabled="disabled" @click="$emit('add', kit)">
+        Добавить
       </button>
     </div>
     <p v-if="disabled" class="fit-warning">
-      Недостаточно места на выбранной полке.
+      Недоступно для выбранной полки.
     </p>
   </article>
 </template>

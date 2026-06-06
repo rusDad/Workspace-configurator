@@ -75,7 +75,7 @@ function fillPercent(placements: ShelfPlacement[], capacityUnits: number) {
           −
         </button>
       </article>
-      <p v-if="!placements.length">Полка свободна. Добавьте ложемент из каталога справа.</p>
+      <p v-if="!placements.length">Полка свободна. Добавьте ложемент из каталога слева.</p>
     </div>
 
     <div class="shelf-actions-inline">
@@ -86,7 +86,6 @@ function fillPercent(placements: ShelfPlacement[], capacityUnits: number) {
     <div v-if="placements.length" class="placement-list">
       <article v-for="placement in placements" :key="placement.id" class="placement-row">
         <div class="placement-row__main">
-          <p class="eyebrow">{{ placement.kind === 'catalog-foam-set' ? 'Каталог' : 'Индивидуально' }}</p>
           <strong>{{ placement.name }}</strong>
           <span>{{ placement.article }} · {{ placement.sizeLabel }} · {{ placementModeLabel(placement) }}</span>
           <div v-if="placement.kind === 'catalog-foam-set'" class="placement-mode" role="group" aria-label="Режим поставки ложемента">
@@ -110,7 +109,7 @@ function fillPercent(placements: ShelfPlacement[], capacityUnits: number) {
         </div>
         <div class="placement-row__side">
           <strong>{{ formatPrice(getPlacementPrice(placement)) }}</strong>
-          <button class="button button--ghost" type="button" @click="$emit('remove', placement.id)">Удалить</button>
+          <button class="link-button placement-row__remove" type="button" @click="$emit('remove', placement.id)">Удалить</button>
         </div>
       </article>
     </div>
