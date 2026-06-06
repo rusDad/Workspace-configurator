@@ -28,28 +28,32 @@ function placementModeLabel(placement: ShelfPlacement) {
       <strong>{{ formatPrice(orderDraft.totals.totalPrice) }}</strong>
     </header>
 
-    <section v-if="orderDraft.cart" class="order-document__section">
-      <h3>Тележка</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Артикул</th>
-            <th>Наименование</th>
-            <th>Цена</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ orderDraft.cart.article }}</td>
-            <td>{{ orderDraft.cart.name }}</td>
-            <td>{{ formatPrice(orderDraft.cart.price) }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="order-document__section">
+    <section class="order-document__section order-composition">
       <h3>Состав рабочего места</h3>
+
+      <article v-if="orderDraft.cart" class="order-storage-item">
+        <div class="order-storage-item__heading">
+          <h4>Тележка</h4>
+          <span>{{ orderDraft.cart.article }}</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Артикул</th>
+              <th>Наименование</th>
+              <th>Цена</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ orderDraft.cart.article }}</td>
+              <td>{{ orderDraft.cart.name }}</td>
+              <td>{{ formatPrice(orderDraft.cart.price) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
       <article v-for="item in orderDraft.shelves" :key="item.shelf.id" class="order-shelf-document">
         <div class="order-shelf-document__title">
           <strong>{{ item.shelf.name }}</strong>

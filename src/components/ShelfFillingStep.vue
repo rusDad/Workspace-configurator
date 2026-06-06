@@ -74,6 +74,11 @@ function previewKit(kit: CatalogFoamInsertKit) {
   selectedKit.value = kit;
 }
 
+function addSelectedKit(kit: CatalogFoamInsertKit) {
+  emit('addCatalogKit', kit);
+  selectedKit.value = null;
+}
+
 function selectedKitDisabled() {
   if (!selectedKit.value || !props.activeShelf) return true;
   return !canAddCatalogKit(selectedKit.value, props.placements, props.activeShelf.capacityUnits);
@@ -82,50 +87,11 @@ function selectedKitDisabled() {
 
 <template>
   <div v-if="cart && activeShelf" class="configurator-grid">
-    <section class="configurator-left">
-      <div class="configurator-context">
-        <span>Тележка: <strong>{{ cart.name }}</strong> · {{ cart.article }}</span>
-        <button class="button button--compact" type="button" @click="$emit('summary')">Далее</button>
-      </div>
-
-      <nav class="shelf-tabs" aria-label="Полки тележки">
-        <button
-          v-for="shelf in cart.shelves"
-          :key="shelf.id"
-          class="shelf-tab"
-          :class="{ 'shelf-tab--active': shelf.id === activeShelfId }"
-          type="button"
-          @click="$emit('selectShelf', shelf.id)"
-        >
-          <strong>{{ shelf.name.replace('Полка ', '') }}</strong>
-          <span>{{ getUsedShelfUnits(shelfPlacements(shelf.id)) }}/{{ shelf.capacityUnits }}</span>
-        </button>
-      </nav>
-
-      <CurrentShelfPanel
-        :shelf="activeShelf"
-        :placements="placements"
-        @remove="$emit('removePlacement', $event)"
-        @update-mode="relayPlacementMode"
-        @reset-active-shelf="$emit('resetActiveShelf')"
-        @reset-all-shelves="$emit('resetAllShelves')"
-      />
-
-      <CatalogKitDetails
-        :kit="selectedKit"
-        :default-new-placement-mode="defaultNewPlacementMode"
-        :disabled="selectedKitDisabled()"
-        @add="$emit('addCatalogKit', $event)"
-        @close="selectedKit = null"
-      />
-    </section>
-
     <section class="catalog-section card">
       <div class="catalog-section__header">
         <div>
-          <p class="eyebrow">Каталог ложементов</p>
-          <h2>Выберите наполнение</h2>
-          <p>{{ activeShelf.name }}: {{ shelfRemainingUnits(activeShelf) }} / {{ activeShelf.capacityUnits }} свободно</p>
+          <h2>Каталог ложементов</h2>
+          <p class="catalog-section__status">{{ activeShelf.name }}: {{ shelfRemainingUnits(activeShelf) }} / {{ activeShelf.capacityUnits }} свободно</p>
         </div>
       </div>
 
@@ -162,6 +128,44 @@ function selectedKitDisabled() {
       </div>
 
       <p v-if="!filteredCatalogKits.length" class="empty-note">По заданным условиям ничего не найдено.</p>
+    </section>
+
+    <section class="configurator-right">
+      <div class="configurator-context">
+        <span>Тележка: <strong>{{ cart.name }}</strong> · {{ cart.article }}</span>
+        <button class="button button--compact" type="button" @click="$emit('summary')">Далее</button>
+      </div>
+
+      <nav class="shelf-tabs" aria-label="Полки тележки">
+        <button
+          v-for="shelf in cart.shelves"
+          :key="shelf.id"
+          class="shelf-tab"
+          :class="{ 'shelf-tab--active': shelf.id === activeShelfId }"
+          type="button"
+          @click="$emit('selectShelf', shelf.id)"
+        >
+          <strong>{{ shelf.name.replace('Полка ', '') }}</strong>
+          <span>{{ getUsedShelfUnits(shelfPlacements(shelf.id)) }}/{{ shelf.capacityUnits }}</span>
+        </button>
+      </nav>
+
+      <CatalogKitDetails
+        :kit="selectedKit"
+        :default-new-placement-mode="defaultNewPlacementMode"
+        :disabled="selectedKitDisabled()"
+        @add="addSelectedKit"
+        @close="selectedKit = null"
+      />
+
+      <CurrentShelfPanel
+        :shelf="activeShelf"
+        :placements="placements"
+        @remove="$emit('removePlacement', $event)"
+        @update-mode="relayPlacementMode"
+        @reset-active-shelf="$emit('resetActiveShelf')"
+        @reset-all-shelves="$emit('resetAllShelves')"
+      />
     </section>
   </div>
 </template>
