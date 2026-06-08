@@ -1,4 +1,4 @@
-import type { CatalogFoamInsertKit } from '../catalog/catalogTypes';
+import type { CartShelf, CatalogFoamInsertKit } from '../catalog/catalogTypes';
 import type { ShelfPlacement } from './workspaceTypes';
 
 export const SHELF_CAPACITY_UNITS = 6;
@@ -11,6 +11,18 @@ export function getRemainingShelfUnits(placements: ShelfPlacement[], shelfCapaci
   return Math.max(shelfCapacityUnits - getUsedShelfUnits(placements), 0);
 }
 
-export function canAddCatalogKit(kit: CatalogFoamInsertKit, placements: ShelfPlacement[], shelfCapacityUnits = SHELF_CAPACITY_UNITS): boolean {
-  return kit.shelfUnits <= getRemainingShelfUnits(placements, shelfCapacityUnits);
+export function canAddCatalogKit(
+  kit: CatalogFoamInsertKit,
+  placements: ShelfPlacement[],
+  shelfCapacityUnits = SHELF_CAPACITY_UNITS,
+  shelfMaxLaymentHeightMm?: number,
+): boolean {
+  const fitsShelfUnits = kit.shelfUnits <= getRemainingShelfUnits(placements, shelfCapacityUnits);
+  const fitsShelfHeight = shelfMaxLaymentHeightMm === undefined || kit.laymentHeightMm <= shelfMaxLaymentHeightMm;
+
+  return fitsShelfUnits && fitsShelfHeight;
+}
+
+export function canAddCatalogKitToShelf(kit: CatalogFoamInsertKit, placements: ShelfPlacement[], shelf: CartShelf): boolean {
+  return canAddCatalogKit(kit, placements, shelf.capacityUnits, shelf.maxLaymentHeightMm);
 }

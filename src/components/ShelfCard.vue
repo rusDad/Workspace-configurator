@@ -18,6 +18,7 @@ defineEmits<{ select: [shelfId: string] }>();
     <div>
       <p class="eyebrow">{{ shelf.widthMm }}×{{ shelf.heightMm }} мм</p>
       <h3>{{ shelf.name }}</h3>
+      <p>До {{ shelf.maxLaymentHeightMm }} мм высота ложемента</p>
       <p>{{ getUsedShelfUnits(placements) }} / {{ shelf.capacityUnits }} единиц полки занято</p>
       <ShelfUnitBar :used-units="getUsedShelfUnits(placements)" :capacity-units="shelf.capacityUnits" />
     </div>

@@ -10,7 +10,7 @@ import type { CatalogFoamInsertKit, ToolItem } from './catalog/catalogTypes';
 import { createInitialWorkspaceState } from './workspace/workspaceState';
 import type { CatalogFoamSetPlacement, LaymentSupplyMode, ShelfPlacement, WizardStep } from './workspace/workspaceTypes';
 import { buildWorkplaceOrderDraft } from './workspace/orderBuilder';
-import { canAddCatalogKit } from './workspace/slotRules';
+import { canAddCatalogKitToShelf } from './workspace/slotRules';
 
 const state = createInitialWorkspaceState();
 
@@ -65,7 +65,7 @@ function addCatalogKit(kit: CatalogFoamInsertKit) {
   if (!state.activeShelfId || !activeShelf.value) return;
 
   const shelfPlacements = state.shelfPlacements[state.activeShelfId] ?? [];
-  if (!canAddCatalogKit(kit, shelfPlacements, activeShelf.value.capacityUnits)) return;
+  if (!canAddCatalogKitToShelf(kit, shelfPlacements, activeShelf.value)) return;
 
   const placement: CatalogFoamSetPlacement = {
     id: `${kit.article}-${crypto.randomUUID()}`,
@@ -74,6 +74,7 @@ function addCatalogKit(kit: CatalogFoamInsertKit) {
     name: kit.name,
     shelfUnits: kit.shelfUnits,
     sizeLabel: kit.sizeLabel,
+    laymentHeightMm: kit.laymentHeightMm,
     laymentSupplyMode: state.defaultNewPlacementMode,
     priceEmpty: kit.priceEmpty,
     priceWithTools: kit.priceWithTools,

@@ -5,6 +5,7 @@ export interface CustomLaymentLaunchRequest {
   shelfName: string;
   widthMm: number;
   heightMm: number;
+  maxLaymentHeightMm: number;
   remainingShelfUnits: number;
   parentCartArticle: string;
 }
@@ -18,6 +19,7 @@ export interface CustomLaymentResult {
   previewPngUrl: string | null;
   shelfUnits: ShelfUnits;
   sizeLabel: ModuleSizeLabel;
+  laymentHeightMm: number;
   widthMm: number;
   heightMm: number;
   laymentType: 'foam-insert';
@@ -38,6 +40,7 @@ export function createMockCustomLaymentResult(request: CustomLaymentLaunchReques
     previewPngUrl: null,
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: Math.min(70, request.maxLaymentHeightMm),
     widthMm: request.widthMm,
     heightMm: request.heightMm,
     laymentType: 'foam-insert',

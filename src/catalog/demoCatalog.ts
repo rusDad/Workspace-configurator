@@ -25,12 +25,12 @@ export const demoToolCarts: ToolCart[] = [
     previewUrl: '/catalog-assets/carts/s01006.webp',
     price: 37990,
     shelves: [
-      { id: 'shelf-1', name: 'Полка 1', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
-      { id: 'shelf-2', name: 'Полка 2', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
-      { id: 'shelf-3', name: 'Полка 3', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
-      { id: 'shelf-4', name: 'Полка 4', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
-      { id: 'shelf-5', name: 'Полка 5', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
-      { id: 'shelf-6', name: 'Полка 6', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
+      { id: 'shelf-1', name: 'Полка 1', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, maxLaymentHeightMm: 70, capacityUnits: 6 },
+      { id: 'shelf-2', name: 'Полка 2', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, maxLaymentHeightMm: 70, capacityUnits: 6 },
+      { id: 'shelf-3', name: 'Полка 3', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, maxLaymentHeightMm: 70, capacityUnits: 6 },
+      { id: 'shelf-4', name: 'Полка 4', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, maxLaymentHeightMm: 70, capacityUnits: 6 },
+      { id: 'shelf-5', name: 'Полка 5', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, maxLaymentHeightMm: 140, capacityUnits: 6 },
+      { id: 'shelf-6', name: 'Полка 6', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, maxLaymentHeightMm: 140, capacityUnits: 6 },
     ],
   },
   {
@@ -39,13 +39,13 @@ export const demoToolCarts: ToolCart[] = [
     previewUrl: '/catalog-assets/carts/s01007.webp',
     price: 39990,
     shelves: [
-      { id: 'shelf-1', name: 'Полка 1', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
-      { id: 'shelf-2', name: 'Полка 2', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
-      { id: 'shelf-3', name: 'Полка 3', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
-      { id: 'shelf-4', name: 'Полка 4', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
-      { id: 'shelf-5', name: 'Полка 5', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
-      { id: 'shelf-6', name: 'Полка 6', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
-      { id: 'shelf-7', name: 'Полка 7', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, capacityUnits: 6 },
+      { id: 'shelf-1', name: 'Полка 1', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, maxLaymentHeightMm: 70, capacityUnits: 6 },
+      { id: 'shelf-2', name: 'Полка 2', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, maxLaymentHeightMm: 70, capacityUnits: 6 },
+      { id: 'shelf-3', name: 'Полка 3', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, maxLaymentHeightMm: 70, capacityUnits: 6 },
+      { id: 'shelf-4', name: 'Полка 4', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, maxLaymentHeightMm: 70, capacityUnits: 6 },
+      { id: 'shelf-5', name: 'Полка 5', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, maxLaymentHeightMm: 70, capacityUnits: 6 },
+      { id: 'shelf-6', name: 'Полка 6', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, maxLaymentHeightMm: 140, capacityUnits: 6 },
+      { id: 'shelf-7', name: 'Полка 7', widthMm: STANDARD_SHELF_WIDTH_MM, heightMm: STANDARD_SHELF_HEIGHT_MM, maxLaymentHeightMm: 140, capacityUnits: 6 },
     ],
   },
 ];
@@ -57,6 +57,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646073.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 6700,
     includedTools: [
@@ -86,6 +87,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646077.webp',
     shelfUnits: 6,
     sizeLabel: 'полка целиком',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(6),
     priceWithTools: 13890,
     includedTools: [
@@ -124,6 +126,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646075.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 3790,
     includedTools: [
@@ -138,6 +141,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646080.webp',
     shelfUnits: 6,
     sizeLabel: 'полка целиком',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(6),
     priceWithTools: 25190,
     includedTools: [
@@ -186,6 +190,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646160.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 6490,
     includedTools: [
@@ -204,6 +209,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646170.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 12393,
     includedTools: [
@@ -226,6 +232,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646165.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 7490,
     includedTools: [
@@ -244,6 +251,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646175.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 13590,
     includedTools: [
@@ -266,6 +274,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646140.webp',
     shelfUnits: 4,
     sizeLabel: '2/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(4),
     priceWithTools: 6690,
     includedTools: [
@@ -278,6 +287,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646258.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 4667,
     includedTools: [
@@ -297,6 +307,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646265.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 4972,
     includedTools: [
@@ -314,6 +325,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646280.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 5290,
     includedTools: [
@@ -333,6 +345,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646382.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 5490,
     includedTools: [
@@ -347,6 +360,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646048.webp',
     shelfUnits: 4,
     sizeLabel: '2/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(4),
     priceWithTools: 13613,
     includedTools: [
@@ -364,6 +378,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646340.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 7412,
     includedTools: [
@@ -379,6 +394,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646045.webp',
     shelfUnits: 4,
     sizeLabel: '2/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(4),
     priceWithTools: 11890,
     includedTools: [
@@ -394,6 +410,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646062.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 8225,
     includedTools: [
@@ -446,6 +463,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/645015.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 5073,
     includedTools: [
@@ -500,6 +518,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646310.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 6192,
     includedTools: [
@@ -515,6 +534,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646305.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 5990,
     includedTools: [
@@ -530,6 +550,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646320.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 8063,
     includedTools: [
@@ -547,6 +568,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646100.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 6190,
     includedTools: [
@@ -571,6 +593,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646110.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 11190,
     includedTools: [
@@ -598,6 +621,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/placeholders/kit-placeholder.svg',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 5683,
     includedTools: [
@@ -657,6 +681,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646058.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 9038,
     includedTools: [
@@ -704,6 +729,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646560.webp',
     shelfUnits: 6,
     sizeLabel: 'полка целиком',
+    laymentHeightMm: 140,
     priceEmpty: demoEmptyLaymentPrice(6),
     priceWithTools: 48790,
     includedTools: [
@@ -745,6 +771,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646155.webp',
     shelfUnits: 6,
     sizeLabel: 'полка целиком',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(6),
     priceWithTools: 26990,
     includedTools: [
@@ -887,6 +914,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/645695.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 3290,
     includedTools: [
@@ -906,6 +934,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/645535.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 5490,
     includedTools: [
@@ -930,6 +959,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/645595.webp',
     shelfUnits: 1,
     sizeLabel: '1/6 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(1),
     priceWithTools: 3990,
     includedTools: [
@@ -947,6 +977,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/645545.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 6890,
     includedTools: [
@@ -1023,6 +1054,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/645635.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 3890,
     includedTools: [
@@ -1040,6 +1072,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646570.webp',
     shelfUnits: 6,
     sizeLabel: 'полка целиком',
+    laymentHeightMm: 140,
     priceEmpty: demoEmptyLaymentPrice(6),
     priceWithTools: 39900,
     includedTools: [
@@ -1082,6 +1115,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/620015.webp',
     shelfUnits: 1,
     sizeLabel: '1/6 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(1),
     priceWithTools: 4490,
     includedTools: [
@@ -1108,6 +1142,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/620012.webp',
     shelfUnits: 2,
     sizeLabel: '1/3 полки',
+    laymentHeightMm: 70,
     priceEmpty: demoEmptyLaymentPrice(2),
     priceWithTools: 4990,
     includedTools: [
@@ -1131,6 +1166,7 @@ export const demoCatalogKits: CatalogFoamInsertKit[] = [
     previewUrl: '/catalog-assets/kits/646580.webp',
     shelfUnits: 6,
     sizeLabel: 'полка целиком',
+    laymentHeightMm: 140,
     priceEmpty: demoEmptyLaymentPrice(6),
     priceWithTools: 31900,
     includedTools: [

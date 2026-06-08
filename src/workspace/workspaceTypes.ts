@@ -11,6 +11,7 @@ export interface CatalogFoamSetPlacement {
   name: string;
   shelfUnits: ShelfUnits;
   sizeLabel: ModuleSizeLabel;
+  laymentHeightMm: number;
   laymentSupplyMode: LaymentSupplyMode;
   priceEmpty: number;
   priceWithTools: number;
@@ -27,6 +28,7 @@ export interface CustomLaymentPlacement {
   orderNumber?: string;
   shelfUnits: ShelfUnits;
   sizeLabel: ModuleSizeLabel;
+  laymentHeightMm: number;
   price: number;
   previewPngUrl: string | null;
   tools: ToolItem[];

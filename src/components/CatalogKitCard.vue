@@ -38,7 +38,7 @@ function sizeBadgeLabel(sizeLabel: string) {
       <button class="catalog-kit-card__title" type="button" @click="$emit('preview', kit)">
         {{ kit.name }}
       </button>
-      <p>{{ kit.sizeLabel }} · {{ kit.includedTools.length }} инструментов</p>
+      <p>{{ kit.sizeLabel }} · высота {{ kit.laymentHeightMm }} мм · {{ kit.includedTools.length }} инструментов</p>
       <strong>{{ formatPrice(modePrice(kit, defaultNewPlacementMode)) }}</strong>
     </div>
     <div class="catalog-kit-card__footer">
