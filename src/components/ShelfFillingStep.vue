@@ -5,7 +5,7 @@ import CatalogKitDetails from './CatalogKitDetails.vue';
 import CurrentShelfPanel from './CurrentShelfPanel.vue';
 import type { CatalogFoamInsertKit, CartShelf, ModuleSizeLabel, ToolCart } from '../catalog/catalogTypes';
 import type { LaymentSupplyMode, ShelfPlacement, ShelfPlacements } from '../workspace/workspaceTypes';
-import { canAddCatalogKit, getRemainingShelfUnits, getUsedShelfUnits } from '../workspace/slotRules';
+import { canAddCatalogKitToShelf, getRemainingShelfUnits, getUsedShelfUnits } from '../workspace/slotRules';
 
 const props = defineProps<{
   cart: ToolCart | null;
@@ -66,7 +66,7 @@ function shelfRemainingUnits(shelf: CartShelf) {
 
 function fitShelfNames(kit: CatalogFoamInsertKit) {
   return props.cart?.shelves
-    .filter((shelf) => shelf.id !== props.activeShelfId && canAddCatalogKit(kit, shelfPlacements(shelf.id), shelf.capacityUnits))
+    .filter((shelf) => shelf.id !== props.activeShelfId && canAddCatalogKitToShelf(kit, shelfPlacements(shelf.id), shelf))
     .map((shelf) => shelf.name) ?? [];
 }
 
@@ -81,7 +81,7 @@ function addSelectedKit(kit: CatalogFoamInsertKit) {
 
 function selectedKitDisabled() {
   if (!selectedKit.value || !props.activeShelf) return true;
-  return !canAddCatalogKit(selectedKit.value, props.placements, props.activeShelf.capacityUnits);
+  return !canAddCatalogKitToShelf(selectedKit.value, props.placements, props.activeShelf);
 }
 </script>
 
@@ -120,7 +120,7 @@ function selectedKitDisabled() {
           :key="kit.article"
           :kit="kit"
           :default-new-placement-mode="defaultNewPlacementMode"
-          :disabled="!canAddCatalogKit(kit, placements, activeShelf.capacityUnits)"
+          :disabled="!canAddCatalogKitToShelf(kit, placements, activeShelf)"
           :fit-shelf-names="fitShelfNames(kit)"
           @add="$emit('addCatalogKit', $event)"
           @preview="previewKit"

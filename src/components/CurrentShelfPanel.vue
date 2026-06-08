@@ -43,7 +43,7 @@ function fillPercent(placements: ShelfPlacement[], capacityUnits: number) {
       <div>
         <p class="eyebrow">Выбранная полка</p>
         <h3>{{ shelf.name }}</h3>
-        <p>{{ shelf.widthMm }}×{{ shelf.heightMm }} мм</p>
+        <p>{{ shelf.widthMm }}×{{ shelf.heightMm }} мм · ложемент до {{ shelf.maxLaymentHeightMm }} мм</p>
       </div>
       <strong class="capacity-pill">Заполнено {{ fillPercent(placements, shelf.capacityUnits) }}%</strong>
     </div>
@@ -87,7 +87,7 @@ function fillPercent(placements: ShelfPlacement[], capacityUnits: number) {
       <article v-for="placement in placements" :key="placement.id" class="placement-row">
         <div class="placement-row__main">
           <strong>{{ placement.name }}</strong>
-          <span>{{ placement.article }} · {{ placement.sizeLabel }} · {{ placementModeLabel(placement) }}</span>
+          <span>{{ placement.article }} · {{ placement.sizeLabel }} · высота {{ placement.laymentHeightMm }} мм · {{ placementModeLabel(placement) }}</span>
           <div v-if="placement.kind === 'catalog-foam-set'" class="placement-mode" role="group" aria-label="Режим поставки ложемента">
             <button
               class="segmented-button"

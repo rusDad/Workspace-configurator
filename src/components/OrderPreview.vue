@@ -57,7 +57,7 @@ function placementModeLabel(placement: ShelfPlacement) {
       <article v-for="item in orderDraft.shelves" :key="item.shelf.id" class="order-shelf-document">
         <div class="order-shelf-document__title">
           <strong>{{ item.shelf.name }}</strong>
-          <span>{{ item.shelf.widthMm }}×{{ item.shelf.heightMm }} мм</span>
+          <span>{{ item.shelf.widthMm }}×{{ item.shelf.heightMm }} мм · ложемент до {{ item.shelf.maxLaymentHeightMm }} мм</span>
         </div>
         <table v-if="item.placements.length">
           <thead>
@@ -65,6 +65,7 @@ function placementModeLabel(placement: ShelfPlacement) {
               <th>Артикул</th>
               <th>Наименование</th>
               <th>Размер</th>
+              <th>Высота</th>
               <th>Режим</th>
               <th>Цена</th>
             </tr>
@@ -77,6 +78,7 @@ function placementModeLabel(placement: ShelfPlacement) {
                 <span>{{ placementKindLabel(placement) }}</span>
               </td>
               <td>{{ placement.sizeLabel }}</td>
+              <td>{{ placement.laymentHeightMm }} мм</td>
               <td>{{ placementModeLabel(placement) }}</td>
               <td>{{ formatPrice(getPlacementPrice(placement)) }}</td>
             </tr>

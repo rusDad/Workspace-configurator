@@ -13,6 +13,7 @@ export interface CartShelf {
   name: string;
   widthMm: number;
   heightMm: number;
+  maxLaymentHeightMm: number;
   capacityUnits: 6;
 }
 
@@ -30,6 +31,7 @@ export interface CatalogFoamInsertKit {
   previewUrl: string | null;
   shelfUnits: ShelfUnits;
   sizeLabel: ModuleSizeLabel;
+  laymentHeightMm: number;
   priceEmpty: number;
   priceWithTools: number;
   includedTools: ToolItem[];

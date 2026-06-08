@@ -31,7 +31,7 @@ function modePrice(kit: CatalogFoamInsertKit, defaultNewPlacementMode: LaymentSu
     </div>
     <p class="eyebrow">{{ kit.article }}</p>
     <h3>{{ kit.name }}</h3>
-    <p>{{ kit.sizeLabel }} · {{ kit.includedTools.length }} инструментов</p>
+    <p>{{ kit.sizeLabel }} · высота {{ kit.laymentHeightMm }} мм · {{ kit.includedTools.length }} инструментов</p>
     <strong>{{ formatPrice(modePrice(kit, props.defaultNewPlacementMode)) }}</strong>
 
     <button class="button button--primary kit-details__add" type="button" :disabled="disabled" @click="$emit('add', kit)">
